@@ -1,10 +1,12 @@
 package controller
 
 import (
+	"GoShortLink/common"
 	"GoShortLink/model"
 	"GoShortLink/util"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 	"net/http"
 )
 
@@ -109,11 +111,16 @@ func Login(context *gin.Context) {
 			"code": 400,
 			"msg":  "密码错误",
 		})
+		log.Printf("token generate err: %v", err)
 		return
 	}
 
 	// 发放 token
-	token := "111"
+	token, err := common.ReleaseToken(user)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"code": 500, "msg": "生成 Token 失败"})
+		return
+	}
 
 	// 返回结果
 	context.JSON(http.StatusOK, gin.H{
@@ -121,6 +128,12 @@ func Login(context *gin.Context) {
 		"msg":  "登录成功",
 		"data": gin.H{"token": token},
 	})
+}
+
+// 获取信息
+func Info(context *gin.Context) {
+	user, _ := context.Get("user")
+	context.JSON(http.StatusOK, gin.H{"code": 200, "msg": gin.H{"user": user}})
 }
 
 // 判断手机号码是否占用

@@ -29,3 +29,12 @@ func GetAUserByTelephone(telephone string) (user *User, err error) {
 	}
 	return
 }
+
+// get a user by userId
+func GetAUserById(userId uint) (user *User, err error) {
+	user = &User{}
+	if err := dao.DB.Where("id=?", userId).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return
+}

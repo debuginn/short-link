@@ -2,14 +2,16 @@ package routes
 
 import (
 	"GoShortLink/controller"
+	"GoShortLink/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.POST("/api/auth/register", controller.Register)
-	r.POST("/api/auth/login", controller.Login)
+	r.POST("/api/auth/register", controller.Register)                     // 用户注册
+	r.POST("/api/auth/login", controller.Login)                           // 用户登录
+	r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info) // 用户信息
 
 	return r
 }
