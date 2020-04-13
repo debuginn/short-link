@@ -2,6 +2,7 @@ package controller
 
 import (
 	"GoShortLink/common"
+	"GoShortLink/dto"
 	"GoShortLink/model"
 	"GoShortLink/util"
 	"github.com/gin-gonic/gin"
@@ -133,7 +134,12 @@ func Login(context *gin.Context) {
 // 获取信息
 func Info(context *gin.Context) {
 	user, _ := context.Get("user")
-	context.JSON(http.StatusOK, gin.H{"code": 200, "msg": gin.H{"user": user}})
+	context.JSON(http.StatusOK, gin.H{
+		"code": 200,
+		"msg": gin.H{
+			"user": dto.ToUserDto(user.(*model.User)),
+		},
+	})
 }
 
 // 判断手机号码是否占用
