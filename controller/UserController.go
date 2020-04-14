@@ -4,6 +4,7 @@ import (
 	"GoShortLink/common"
 	"GoShortLink/dto"
 	"GoShortLink/model"
+	"GoShortLink/response"
 	"GoShortLink/util"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -83,35 +84,23 @@ func Login(context *gin.Context) {
 
 	// 数据验证
 	if len(telephone) != 11 {
-		context.JSON(http.StatusUnprocessableEntity, gin.H{
-			"code": 422,
-			"msg":  "手机号必须为 11位",
-		})
+		response.Response(context, http.StatusUnprocessableEntity, 422, nil, "手机号必须为 11位")
 		return
 	}
 	if len(password) <= 6 {
-		context.JSON(http.StatusUnprocessableEntity, gin.H{
-			"code": 422,
-			"msg":  "密码不能少于 6位",
-		})
+		response.Response(context, http.StatusUnprocessableEntity, 422, nil, "密码不能少于 6位")
 		return
 	}
 
 	// 判断手机号是否注册
 	user, err := model.GetAUserByTelephone(telephone)
 	if err != nil || user.ID == 0 {
-		context.JSON(http.StatusUnprocessableEntity, gin.H{
-			"code": 422,
-			"msg":  "手机号未注册",
-		})
+		response.Response(context, http.StatusUnprocessableEntity, 422, nil, "手机号未注册")
 		return
 	}
 	// 判断密码是否正确
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"code": 400,
-			"msg":  "密码错误",
-		})
+		response.Fail(context, nil, "密码错误")
 		log.Printf("token generate err: %v", err)
 		return
 	}
@@ -119,27 +108,19 @@ func Login(context *gin.Context) {
 	// 发放 token
 	token, err := common.ReleaseToken(user)
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"code": 500, "msg": "生成 Token 失败"})
+		response.Response(context, http.StatusInternalServerError, 500, nil, "生成 Token 失败")
 		return
 	}
 
 	// 返回结果
-	context.JSON(http.StatusOK, gin.H{
-		"code": 200,
-		"msg":  "登录成功",
-		"data": gin.H{"token": token},
-	})
+	response.Success(context, &gin.H{"token": token}, "登录成功")
 }
 
 // 获取信息
 func Info(context *gin.Context) {
 	user, _ := context.Get("user")
-	context.JSON(http.StatusOK, gin.H{
-		"code": 200,
-		"msg": gin.H{
-			"user": dto.ToUserDto(user.(*model.User)),
-		},
-	})
+	dtoUser := dto.ToUserDto(user.(*model.User))
+	response.Success(context, &gin.H{"user": dtoUser}, "")
 }
 
 // 判断手机号码是否占用
