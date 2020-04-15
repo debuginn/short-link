@@ -4,9 +4,13 @@ import (
 	"GoShortLink/dao"
 	"GoShortLink/model"
 	"GoShortLink/route"
+	"github.com/spf13/viper"
+	"os"
 )
 
 func main() {
+	// 导入配置文件
+	initConfig()
 	// 初始化数据库
 	err := dao.InitDB()
 	if err != nil {
@@ -19,5 +23,18 @@ func main() {
 	// 注册路由
 	r := routes.SetupRouter()
 	// 开启服务
-	panic(r.Run())
+	port := viper.GetString("server.port")
+	panic(r.Run(":" + port))
+}
+
+// 导入系统配置文件
+func initConfig() {
+	workDir, _ := os.Getwd()
+	viper.SetConfigName("application")
+	viper.SetConfigType("yml")
+	viper.AddConfigPath(workDir + "/config")
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(err)
+	}
 }
