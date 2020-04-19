@@ -8,7 +8,7 @@ import (
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
-
+	r.Use(middleware.CORSMiddleware())                                    // CORS 同源策略 中间件
 	r.POST("/api/auth/register", controller.Register)                     // 用户注册
 	r.POST("/api/auth/login", controller.Login)                           // 用户登录
 	r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info) // 用户信息

@@ -13,10 +13,17 @@ import (
 
 // 注册用户
 func Register(context *gin.Context) {
+	var requestUser = model.User{}
+	err := context.Bind(&requestUser)
+	if err != nil {
+		response.ServerError(context, nil, "请求参数错误")
+		return
+	}
+
 	// 获取参数
-	username := context.PostForm("username")
-	telephone := context.PostForm("telephone")
-	password := context.PostForm("password")
+	username := requestUser.Name
+	telephone := requestUser.Telephone
+	password := requestUser.Password
 
 	// 数据验证
 	if len(telephone) != 11 {
@@ -53,7 +60,13 @@ func Register(context *gin.Context) {
 	if errCreate != nil {
 		response.Created(context, nil, "用户创建失败")
 	} else {
-		response.Success(context, nil, "用户创建成功")
+		// 发放 token
+		token, err := common.ReleaseToken(&newUser)
+		if err != nil {
+			response.Fail(context, nil, "生成 Token 失败")
+			return
+		}
+		response.Success(context, &gin.H{"token": token}, "用户创建成功")
 	}
 }
 
