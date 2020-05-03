@@ -73,8 +73,14 @@ func Register(context *gin.Context) {
 // 用户登录
 func Login(context *gin.Context) {
 	// 获取参数
-	telephone := context.PostForm("telephone")
-	password := context.PostForm("password")
+	var requestUser = model.User{}
+	err := context.Bind(&requestUser)
+	if err != nil {
+		response.ServerError(context, nil, "请求参数错误")
+		return
+	}
+	telephone := requestUser.Telephone
+	password := requestUser.Password
 	// 数据验证
 	if len(telephone) != 11 {
 		response.UnprocessableEntity(context, nil, "手机号必须为 11位")
