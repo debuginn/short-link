@@ -2,7 +2,7 @@ package common
 
 import (
 	"github.com/debuginn/GoShortLink/model"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
 	"time"
 )
 
@@ -13,7 +13,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-// 根据用户 生成 Token
+// ReleaseToken 根据用户 生成 Token
 func ReleaseToken(user *model.User) (string, error) {
 	expirationTime := time.Now().Add(7 * 24 * time.Hour)
 	claims := &Claims{
@@ -34,7 +34,7 @@ func ReleaseToken(user *model.User) (string, error) {
 	return tokenString, nil
 }
 
-// 解析 Token
+// ParseToken 解析 Token
 func ParseToken(tokenString string) (*jwt.Token, *Claims, error) {
 	claims := &Claims{}
 
