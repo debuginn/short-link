@@ -1,7 +1,7 @@
 package model
 
 import (
-	"GoShortLink/dao"
+	"github.com/debuginn/GoShortLink/dao"
 	"github.com/jinzhu/gorm"
 )
 

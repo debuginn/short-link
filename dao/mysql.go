@@ -9,7 +9,7 @@ import (
 
 var DB *gorm.DB
 
-// 连接数据库
+// InitDB 连接数据库
 func InitDB() (err error) {
 	driveName := viper.GetString("datasource.driverName")
 	host := viper.GetString("datasource.host")
@@ -34,7 +34,7 @@ func InitDB() (err error) {
 	return DB.DB().Ping()
 }
 
-// 关闭 DB 实例方法
+// CloseDB 关闭 DB 实例方法
 func CloseDB() {
 	DB.Close()
 }

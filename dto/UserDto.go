@@ -1,6 +1,6 @@
 package dto
 
-import "GoShortLink/model"
+import "github.com/debuginn/GoShortLink/model"
 
 // UserDto Dto
 type UserDto struct {

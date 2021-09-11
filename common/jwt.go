@@ -1,7 +1,7 @@
 package common
 
 import (
-	"GoShortLink/model"
+	"github.com/debuginn/GoShortLink/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )

@@ -1,14 +1,14 @@
 package middleware
 
 import (
-	"GoShortLink/common"
-	"GoShortLink/model"
+	"github.com/debuginn/GoShortLink/common"
+	"github.com/debuginn/GoShortLink/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
 )
 
-// 用户校验中间件
+// AuthMiddleware 用户校验中间件
 func AuthMiddleware() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		// 获取 authorization header

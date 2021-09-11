@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"GoShortLink/controller"
-	"GoShortLink/middleware"
+	"github.com/debuginn/GoShortLink/controller"
+	"github.com/debuginn/GoShortLink/middleware"
 	"github.com/gin-gonic/gin"
 )
 

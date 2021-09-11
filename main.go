@@ -1,9 +1,9 @@
 package main
 
 import (
-	"GoShortLink/dao"
-	"GoShortLink/model"
-	"GoShortLink/route"
+	"github.com/debuginn/GoShortLink/dao"
+	"github.com/debuginn/GoShortLink/model"
+	"github.com/debuginn/GoShortLink/route"
 	"github.com/spf13/viper"
 	"os"
 )

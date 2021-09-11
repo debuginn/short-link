@@ -2,7 +2,7 @@ package middleware
 
 import "github.com/gin-gonic/gin"
 
-// CORS 同源策略 中间件
+// CORSMiddleware CORS 同源策略 中间件
 func CORSMiddleware() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		context.Writer.Header().Set("Access-Control-Allow-Origin", "*")

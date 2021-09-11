@@ -1,17 +1,17 @@
 package controller
 
 import (
-	"GoShortLink/common"
-	"GoShortLink/dto"
-	"GoShortLink/model"
-	"GoShortLink/response"
-	"GoShortLink/util"
+	"github.com/debuginn/GoShortLink/common"
+	"github.com/debuginn/GoShortLink/dto"
+	"github.com/debuginn/GoShortLink/model"
+	"github.com/debuginn/GoShortLink/response"
+	"github.com/debuginn/GoShortLink/util"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
-// 注册用户
+// Register 注册用户
 func Register(context *gin.Context) {
 	var requestUser = model.User{}
 	err := context.Bind(&requestUser)

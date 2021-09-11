@@ -1,12 +1,11 @@
-module GoShortLink
+module github.com/debuginn/GoShortLink
 
-go 1.13
+go 1.15
 
 require (
-	github.com/debuginn/GoShortLink v0.0.1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/gin-gonic/gin v1.6.2
-	github.com/jinzhu/gorm v1.9.12
-	github.com/spf13/viper v1.6.3
-	golang.org/x/crypto v0.0.0-20191205180655-e7c4368fe9dd
+	github.com/gin-gonic/gin v1.7.4
+	github.com/jinzhu/gorm v1.9.16
+	github.com/spf13/viper v1.8.1
+	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
 )

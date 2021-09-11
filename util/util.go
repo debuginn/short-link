@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// 生成长度为 n 的随机字符串
+// RandString 生成长度为 n 的随机字符串
 func RandString(n int) string {
 	var letters = []byte("qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM")
 	// 使用 make 创建一个长度为 n 的字节类型的切片
