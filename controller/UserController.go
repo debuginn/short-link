@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"log"
+
 	"github.com/debuginn/GoShortLink/common"
 	"github.com/debuginn/GoShortLink/dto"
 	"github.com/debuginn/GoShortLink/model"
@@ -8,7 +10,6 @@ import (
 	"github.com/debuginn/GoShortLink/util"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"log"
 )
 
 // Register 注册用户

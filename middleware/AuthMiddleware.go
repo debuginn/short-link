@@ -1,11 +1,12 @@
 package middleware
 
 import (
+	"net/http"
+	"strings"
+
 	"github.com/debuginn/GoShortLink/common"
 	"github.com/debuginn/GoShortLink/model"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"strings"
 )
 
 // AuthMiddleware 用户校验中间件

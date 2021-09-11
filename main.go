@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/debuginn/GoShortLink/dao"
 	"github.com/debuginn/GoShortLink/model"
-	"github.com/debuginn/GoShortLink/route"
+	"github.com/debuginn/GoShortLink/router"
 	"github.com/spf13/viper"
 	"os"
 )

@@ -15,13 +15,13 @@ type User struct {
 
 //---- User Model CURD
 
-// create a user function
+// CreateAUser create a user function
 func CreateAUser(user *User) (err error) {
 	err = dao.DB.Create(&user).Error
 	return
 }
 
-// get a user by telephone
+// GetAUserByTelephone get a user by telephone
 func GetAUserByTelephone(telephone string) (user *User, err error) {
 	user = &User{}
 	if err := dao.DB.Where("telephone=?", telephone).First(&user).Error; err != nil {
@@ -30,7 +30,7 @@ func GetAUserByTelephone(telephone string) (user *User, err error) {
 	return
 }
 
-// get a user by userId
+// GetAUserById get a user by userId
 func GetAUserById(userId uint) (user *User, err error) {
 	user = &User{}
 	if err := dao.DB.Where("id=?", userId).First(&user).Error; err != nil {

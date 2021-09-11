@@ -1,9 +1,10 @@
 package common
 
 import (
+	"time"
+
 	"github.com/debuginn/GoShortLink/model"
 	"github.com/golang-jwt/jwt/v4"
-	"time"
 )
 
 var jwtKey = []byte("a_secret_crect")
